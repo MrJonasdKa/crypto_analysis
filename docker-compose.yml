@@ -1,0 +1,18 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: crypto-analysis-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: crypto_analysis
+      MARIADB_USER: crypto_user
+      MARIADB_PASSWORD: changeme
+      MARIADB_ROOT_PASSWORD: changeme_root
+    ports:
+      - "3307:3306"
+    volumes:
+      - crypto_db_data:/var/lib/mysql
+      - ./data-pipeline/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  crypto_db_data:
