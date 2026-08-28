@@ -27,7 +27,11 @@ HISTORY_DAYS = int(os.environ.get("HISTORY_DAYS", 730))
 def fetch_market_chart(coingecko_id: str, days: int) -> dict:
     url = f"{COINGECKO_BASE}/coins/{coingecko_id}/market_chart"
     params = {"vs_currency": "usd", "days": days, "interval": "daily"}
-    resp = requests.get(url, params=params, timeout=30)
+    headers = {}
+    api_key = os.environ.get("COINGECKO_API_KEY")
+    if api_key:
+        headers["x-cg-demo-api-key"] = api_key
+    resp = requests.get(url, params=params, headers=headers, timeout=30)
     resp.raise_for_status()
     return resp.json()
 
