@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi import Depends
+from app.security import verify_api_key
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import coins, prices, regression, correlation
@@ -19,10 +21,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(coins.router)
-app.include_router(prices.router)
-app.include_router(regression.router)
-app.include_router(correlation.router)
+app.include_router(coins.router, dependencies=[Depends(verify_api_key)])
+app.include_router(prices.router, dependencies=[Depends(verify_api_key)])
+app.include_router(regression.router, dependencies=[Depends(verify_api_key)])
+app.include_router(correlation.router, dependencies=[Depends(verify_api_key)])
 
 
 @app.get("/health")
