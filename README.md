@@ -24,6 +24,16 @@ crypto-analysis/
 └── docker-compose.yml     # local MariaDB for dev
 ```
 
+## Why this dataset
+
+Built out of a longer-running interest in crypto — following the space for
+roughly a decade, and over the past year specifically studying trading
+strategies and blockchain fundamentals in a more structured way. The deeper
+interest isn't really in trading itself so much as the platforms and
+security engineering behind it. This project is an attempt to understand
+that world from the data side: the same trend/pattern analysis that trading
+indicators rely on, built from scratch rather than used as a black-box tool.
+
 ## Setup
 
 1. **Start the DB**
